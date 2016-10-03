@@ -1,0 +1,9 @@
+<%
+  grouped = @synsets.group_by { |s| s.synset_type }
+  grouped.each do |group_name, group_content| %>
+    <h3><%= WordNet::SYNSET_TYPES[group_name] %></h3>
+    <%=
+      group_content.map do |s|
+        SynSet.new(s).render_link
+      end * '<br>' %>
+<% end %>
